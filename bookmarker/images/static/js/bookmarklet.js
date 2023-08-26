@@ -8,7 +8,7 @@ var head = document.getElementsByTagName('head')[0];  // Get HTML head element
 var link = document.createElement('link'); // Create new link Element
 link.rel = 'stylesheet'; // set the attributes for link element
 link.type = 'text/css';
-link.href = styleUrl + '?r=' + Math.floor(Math.random()*9999999999999999);
+link.href = styleUrl + '?r=' + Math.floor(Math.random() * 9999999999999999);
 head.appendChild(link);  // Append link element to HTML head
 
 // load HTML
@@ -32,16 +32,15 @@ function bookmarkletLaunch() {
 
   // close event
   bookmarklet.querySelector('#close')
-             .addEventListener('click', function(){
-    bookmarklet.style.display = 'none'
-  });
+    .addEventListener('click', function () {
+      bookmarklet.style.display = 'none'
+    });
 
   // find images in the DOM with the minimum dimensions
   images = document.querySelectorAll('img[src$=".jpg"], img[src$=".jpeg"], img[src$=".png"]');
   images.forEach(image => {
-    if(image.naturalWidth >= minWidth
-       && image.naturalHeight >= minHeight)
-    {
+    if (image.naturalWidth >= minWidth
+      && image.naturalHeight >= minHeight) {
       var imageFound = document.createElement('img');
       imageFound.src = image.src;
       imagesFound.append(imageFound);
@@ -50,10 +49,10 @@ function bookmarkletLaunch() {
 
   // select image event
   imagesFound.querySelectorAll('img').forEach(image => {
-    image.addEventListener('click', function(){
-        imageSelected = event.target;
-        bookmarklet.style.display = 'none';
-        window.open(siteUrl + 'imaeg')
+    image.addEventListener('click', function (event) {
+      imageSelected = event.target;
+      bookmarklet.style.display = 'none';
+      window.open(siteUrl + 'images/create/?url=' + encodeURIComponent(imageSelected.src) + '&title=' + encodeURIComponent(document.title), '_blank');
     })
   })
 }
